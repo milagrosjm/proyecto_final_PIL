@@ -23,7 +23,27 @@ class Project:
                 print("N°"+ str(self.items.index(item)+1)+" " + item.name)
 
     def listItemsByState(self):
-        pass
+        itemsBacklog = []
+        itemsToDo = []
+        itemsInProgress = []
+        itemsComplete = []
+        for item in self.items:
+            if item.state == None:
+                itemsBacklog.append(item)
+            elif item.state == "ToDo":
+                itemsToDo.append(item)
+            elif item.state == "InProgress":
+                itemsInProgress.append(item)
+            else: 
+                itemsComplete.append(item)
+        print("BACKLOG")
+        for i in itemsBacklog:
+            print(item.name)
+        print("TO DO")
+        for i in itemsToDo:
+            print(item.name)
+
+
 
     def addItem(self, item):
         self.items.append(item)
