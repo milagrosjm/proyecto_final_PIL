@@ -5,7 +5,15 @@ class Item:
     def __init__(self, titulo, descripcion):
         self.name = titulo
         self.description = descripcion
-        self.state = None
+        self.state = "Backlog"
+
+    def changeState(self, number):
+        if number == 1:
+            self.state = "To Do"
+        elif number == 2:
+            self.state = "In Progress"
+        else:
+            self.state = "Complete"
 
 
 class Project:
@@ -28,7 +36,7 @@ class Project:
         itemsInProgress = []
         itemsComplete = []
         for item in self.items:
-            if item.state == None:
+            if item.state == "Backlog":
                 itemsBacklog.append(item)
             elif item.state == "ToDo":
                 itemsToDo.append(item)

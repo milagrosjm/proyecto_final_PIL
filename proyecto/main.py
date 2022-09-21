@@ -12,14 +12,18 @@ def itemInterface(index, projectIndex):
         print("\t\t\t" + projects[projectIndex].items[index].name)
         print("--------------------------------------------------------")
         print("Descripcion: " + projects[projectIndex].items[index].description)
-        opt = int(input("\n1. Editar descripcion\n2. Eliminar\n3. Volver\n\nIngresar opcion: "))
+        print ("Estado: " + projects[projectIndex].items[index].state)
+        opt = int(input("\n1. Editar descripcion\n2. Cambiar estado\n3. Eliminar\n4. Volver\n\nIngresar opcion: "))
         if opt == 1:
             projects[projectIndex].items[index].description = input("\nNueva descripcion: ")
         elif opt == 2:
+            itemState = int(input("\nIngrese nuevo estado (1. To Do - 2. In Progress - 3. Complete): "))
+            projects[projectIndex].items[index].changeState(itemState)
+        elif opt == 3:
             projects[projectIndex].deleteItem(projects[projectIndex].items[index])
             print("\n" + t.deleteditem)
             break
-        elif opt == 3:
+        elif opt == 4:
             break
         else:
             print("\n" + t.error + " - Opcion no valida")
@@ -68,7 +72,7 @@ def listProjects():
             if opt == 1:
                 projectindex = int(input("\nIngrese el numero del proyecto: ")) - 1
                 if exists(projects, projectindex): 
-                    projectInteface(projectindex)
+                    projectInterface(projectindex)
                 else: 
                     print("\n" + t.error +" - El valor ingresado es invalido")
             elif opt == 2:
@@ -89,7 +93,7 @@ def newProject():
     name = input("\nIngrese el nombre del proyecto: ")
     project = c.Project(name)
     projects.append(project)
-    projectInteface(len(projects) - 1)
+    projectInterface(len(projects) - 1)
     
 
 def menuMain():
