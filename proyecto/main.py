@@ -25,7 +25,7 @@ def itemInterface(index, projectIndex):
             print("\n" + t.error + " - Opcion no valida")
        
 
-def projectInteface(index):
+def projectInterface(index):
     while True:
         print("\n--------------------------------------------------------")
         print("\t\t\t" + projects[index].name)
