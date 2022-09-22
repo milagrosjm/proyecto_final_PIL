@@ -44,14 +44,24 @@ class Project:
                 itemsInProgress.append(item)
             else: 
                 itemsComplete.append(item)
-        print("BACKLOG")
+        print("\nLos items en BACKLOG son: ")
         for i in itemsBacklog:
-            print(item.name)
-        print("TO DO")
+            print("-"+i.name)
+        print("Los items PARA HACER son: ")
         for i in itemsToDo:
-            print(item.name)
-
-
+            print("-"+i.name)
+        print("Los items EN PROGRESO son: ")
+        for i in itemsInProgress:
+            print("-"+i.name)
+        print("Los items COMPLETADOS son: ")
+        for i in itemsComplete:
+            print("-"+i.name)
+        #print("BACKLOG")
+        #for i in itemsBacklog:
+        #    print(item.name)
+        #print("TO DO")
+        #for i in itemsToDo:
+        #    print(item.name)
 
     def addItem(self, item):
         self.items.append(item)
