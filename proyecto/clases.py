@@ -38,9 +38,9 @@ class Project:
         for item in self.items:
             if item.state == "Backlog":
                 itemsBacklog.append(item)
-            elif item.state == "ToDo":
+            elif item.state == "To Do":
                 itemsToDo.append(item)
-            elif item.state == "InProgress":
+            elif item.state == "In Progress":
                 itemsInProgress.append(item)
             else: 
                 itemsComplete.append(item)
