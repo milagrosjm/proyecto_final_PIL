@@ -73,7 +73,7 @@ FROM customers c
 WHERE c.phone is null;
 
 --¿ Listar los productos mas vendidos en el ultimo mes registrado y su precio ?
-SELECT pr.productCode, pr.productName
+SELECT pr.productCode as codigo_producto, pr.productName as nombre_producto, pr.buyPrice as precio
 FROM products pr, orders o, orderdetails od
 WHERE od.orderNumber = o.orderNumber AND od.productCode = pr.productCode AND (o.orderDate BETWEEN DATE_ADD((SELECT MAX(rd.orderdate) FROM orders rd), INTERVAL -1 MONTH) AND (SELECT MAX(ord.orderdate) FROM orders ord))
 
