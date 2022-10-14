@@ -50,18 +50,27 @@ WHERE c.customerNumber NOT IN (SELECT p.customerNumber FROM payments p);
 --¿ Cuanto se recaudo en los ultimos 6 meses ?
 SELECT SUM(p.amount) as recaudado 
 FROM payments p 
-WHERE p.paymentDate BETWEEN CURRENT_DATE() AND DATE_ADD(CURRENT_DATE(), INTERVAL 6 MONTH);
+WHERE p.paymentDate BETWEEN CURRENT_DATE() AND DATE_ADD(CURRENT_DATE(), INTERVAL -6 MONTH);
 
 --¿ Cual es el producto mas vendido ?
-SELECT o.productCode as codigo_producto, p.productName as nombre_producto, COUNT(*) as cantidad 
+SELECT o.productCode as codigo_producto, p.productName as nombre_producto, COUNT(*) as cantidad_veces_vendido 
 FROM orderdetails o, products p 
 WHERE p.productCode=o.productCode 
 GROUP BY o.productCode 
 ORDER BY cantidad DESC;
 
 --¿ Cual les son los 10 mejores clientes ?
+SELECT c.customerNumber as numero_cliente, c.customerName as nombre_cliente, COUNT(*) as cantidad_compras
+FROM customers c, orders o
+WHERE c.customerNumber = o.customerNumber 
+GROUP BY c.customerNumber, c.customerName
+ORDER BY cantidad_compras DESC
+LIMIT 10
 
 --¿ Cada cuanto tiempo regresa un cliente ?
+SELECT o.customerNumber as numero_cliente, o.orderDate as fecha_orden 
+FROM orders o 
+GROUP BY o.customerNumber, o.orderDate;
 
 --¿ Cuantos clientes no tienen registrado su telefono ? ¿ Quienes son ?
 SELECT COUNT(*) as sin_telefono_registrado 
@@ -73,9 +82,11 @@ FROM customers c
 WHERE c.phone is null;
 
 --¿ Listar los productos mas vendidos en el ultimo mes registrado y su precio ?
-SELECT pr.productCode as codigo_producto, pr.productName as nombre_producto, pr.buyPrice as precio
-FROM products pr, orders o, orderdetails od
-WHERE od.orderNumber = o.orderNumber AND od.productCode = pr.productCode AND (o.orderDate BETWEEN DATE_ADD((SELECT MAX(rd.orderdate) FROM orders rd), INTERVAL -1 MONTH) AND (SELECT MAX(ord.orderdate) FROM orders ord))
+SELECT pr.productCode as codigo_producto, pr.productName as nombre_producto, pr.buyPrice as precio, sum(od.quantityOrdered) as cantidad_vendida 
+FROM products pr, orders o, orderdetails od 
+WHERE od.orderNumber = o.orderNumber AND od.productCode = pr.productCode AND (o.orderDate BETWEEN (DATE_ADD((SELECT MAX(rd.orderdate) FROM orders rd), INTERVAL -1 MONTH)) AND (SELECT MAX(ord.orderdate) FROM orders ord)) 
+GROUP BY pr.productCode 
+ORDER BY cantidad_vendida DESC;
 
 --¿ Quien es el jefe de cada departamento ?
 SELECT e.officeCode as oficina, e.firstName as nombre, e.firstName as apellido 
@@ -83,3 +94,8 @@ FROM employees e
 WHERE e.jobTitle LIKE "%manager%";
 
 --¿ Cual es el empleado que mas vende?
+SELECT e.employeeNumber as numero_empledo, e.firstName nombre_empleado, e.lastName as apellido_empleado, COUNT(*) as cantidad_ventas
+FROM orders o, customers c, employees e
+WHERE o.customerNumber = c.customerNumber AND c.salesRepEmployeeNumber = e.employeeNumber
+GROUP BY e.employeeNumber, e.firstName, e.lastName 
+ORDER BY cantidad_ventas DESC
