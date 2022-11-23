@@ -23,3 +23,10 @@ class Hero(models.Model):
         choices=UNIVERSE_CHOISES,
         verbose_name='Universo'
     )
+
+    class Meta:
+        verbose_name = 'Heroe'
+        verbose_name_plural = 'Heroes'
+
+    def __str__(self):
+        return self.name
