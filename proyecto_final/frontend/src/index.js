@@ -1,27 +1,30 @@
+//react imports
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import { BrowserRouter, Routes, Route   } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import './index.css';
 
-import HeroesForm from './components/heroes/HeroesForm'
-import Navbar from './components/navbar/Navbar'
+//components imports
+import App from './App';
+import Registry from './components/registry/registry-form'
+import Home from './components/home/home-form'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
+
     <BrowserRouter>
-      <Navbar></Navbar>
-        <div className='conteiner my-4'>
+        <div>
           <Routes>
-            <Route exact path='/' element={<App/>}/>
-            <Route path='/heroe-form' element={<HeroesForm/>}/>
+            <Route exact path="/" element={<App />} />
+            <Route path="/registro" element={<Registry />} />
+            <Route path="/inicio" element={<Home />} />
           </Routes>
         </div>
     </BrowserRouter>
   </>
-  
 );
 
 // If you want to start measuring performance in your app, pass a function
