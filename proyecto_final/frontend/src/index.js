@@ -7,8 +7,8 @@ import './index.css';
 
 //components imports
 import App from './App';
-import Registry from './components/registry/registry-form'
-import Home from './components/home/home-form'
+import Registry from './components/registry/registry_form'
+import Home from './components/home/home_form'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

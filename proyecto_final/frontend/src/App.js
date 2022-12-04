@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 
 //components imports
-import Login from './components/login/login-form'
+import Login from './components/login/login_form'
 
 function App() {
   return (
