@@ -38,7 +38,8 @@ const Registry = () => {
 
         try {
             res = await registry_server.registerUser(user);
-            history("/");
+            console.log(res)
+            //history("/");
           } catch{
             console.log('Error al registrar usuario');
           }

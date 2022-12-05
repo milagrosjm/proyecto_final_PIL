@@ -1,8 +1,8 @@
-const API_URL = 'http://localhost:8000/user/'
+const API_URL = 'http://localhost:8000/noter/'
 
 export const registerUser = async (newUser) => {
     console.log(newUser, "hola")
-    return await fetch(API_URL+'user/',{
+    return await fetch(API_URL+'registry/',{
         method: 'POST',
         headers:{
             'Content-Type': 'application/json',

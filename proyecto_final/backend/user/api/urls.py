@@ -14,6 +14,6 @@ urlpatterns = [
         'user/<int:pk>',UserDetailApiView.as_view(), name='user_deatail_api'
     ),
     path(
-        'user/', UserCreateApiView.as_view(), name='user_create_api'
+        'registry/', UserCreateApiView.as_view(), name='user_create_api'
     ),
 ]

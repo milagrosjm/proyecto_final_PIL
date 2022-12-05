@@ -13,6 +13,12 @@ class Notes(models.Model):
         verbose_name="Id"
 
     )
+    tittle = models.CharField(
+        max_length=20,
+        verbose_name='Titulo',
+        default=' '
+    )
+
     text = models.CharField(
         max_length=1000,
         verbose_name='Texto'
@@ -34,4 +40,4 @@ class Notes(models.Model):
         verbose_name_plural = 'Notes'
 
     def __str__(self):
-        return self.name
+        return self.tittle

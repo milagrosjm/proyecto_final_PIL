@@ -72,3 +72,27 @@ label {
   color: rgb(34, 34, 34);;
   text-align: left;
 }
+
+.Login-header {
+  background-color: #282c34;
+  background-repeat: round;
+  background-image: url(./resourses/abstract-blue-background-with-smooth-lines_476363-5999.webp);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Home-container {
+  background-repeat: round;
+  background-image: url(./resourses/Solid_blue.svg.png);
+  min-height: 100vh;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
