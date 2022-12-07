@@ -7,7 +7,7 @@ from user.models import User
 class Notes(models.Model):
 #Atributos
 
-    id = models.IntegerField(
+    id = models.AutoField(
         primary_key=True,
         unique=True,
         verbose_name="Id"
@@ -24,7 +24,7 @@ class Notes(models.Model):
         verbose_name='Texto'
     )
 
-    type = models.IntegerField(
+    type = models.PositiveIntegerField(
         verbose_name='Tipo'
     )
 

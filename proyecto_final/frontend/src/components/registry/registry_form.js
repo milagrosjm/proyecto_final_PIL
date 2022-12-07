@@ -39,7 +39,7 @@ const Registry = () => {
             res = await registry_server.registerUser(user);
             //console.log(res)
             if (res.status === 201){
-                console.log(res.status)
+                //console.log(res.status)
                 alert('El usuario fue registrado correctamente.');
                 history("/ingreso");
             }
