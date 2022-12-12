@@ -8,34 +8,46 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap'
 
 //components imports
+import *  as login_server from './login_server';
 
 
 const Login = () => {
     const history = useNavigate();
     const params = useParams();
 
-    const [user,setData] = useState({
+    const [newLogin,setUser] = useState({
         username:"",
         password:"",
    });
 
-   const {username,password} = user;
+const {username,password} = newLogin;
 
-   const changeHandler = e => {
-    setData({...user,[e.target.name]:[e.target.value]});
-    }
+const changeHandler = e => {
+    setUser({...newLogin,[e.target.name]:[e.target.value]});
+}
 
-    const submitHandler = e => {
-        e.preventDefault();
+const submitHandler = async e => {
+    e.preventDefault();
         //console.log(user);
-        try {
-            //res = await registry_server.login(data);
-            if (user.password[0] === 'm123' & user.username[0] === 'milagrosjm')
-                history("/inicio/"+user.username);
-          } catch{
-            console.log('El usuario ingresado no existe');
-          }
+    try {
+        let res;
+        //console.log(newLogin)
+        res = await login_server.login(newLogin);
+        const data = await res.json();
+        //console.log(data.token)
+
+        if (res.status === 200){
+            console.log('entra en 200')
+            setUser(newLogin)
+            history("/inicio/"+newLogin.username, {state:{token: data.token}});
         }
+        else{
+            alert("ERROR. El usuario ingresado o contraseña son incorrectos.")
+        }
+    } catch{
+            console.log('El usuario ingresado no existe.');
+    }
+}
 
 return (
     <header className="Login-header">

@@ -23,7 +23,7 @@ export const updateNote = async (note) => {
 };
 
 export const createNote = async (newNote) => {
-    console.log(newNote, "hola", newNote.text)
+    //console.log(newNote, "hola", newNote.text)
     return await fetch(API_URL+'createNote/',{
         method: 'POST',
         headers:{
@@ -36,5 +36,15 @@ export const createNote = async (newNote) => {
             "type": Number(newNote.type),
             "user": String(newNote.user).trim()
         })
+    });
+};
+
+export const getNotes = async (username) => {
+    return await fetch(API_URL+'notes/'+username+ '/');
+};
+
+export const deleteNote = async (note) => {
+    return await fetch(API_URL+'note/'+note.id+'/',{
+        method: 'DELETE',
     });
 };

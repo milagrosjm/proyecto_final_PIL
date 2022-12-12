@@ -15,6 +15,7 @@ export const registerUser = async (newUser) => {
             "lastname": String(newUser.lastname).trim(),
             "email": String(newUser.email).trim(),
             "password": String(newUser.password).trim(),
+            "is_active": Boolean(newUser.is_active),
         })
     });
 };

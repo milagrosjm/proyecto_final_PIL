@@ -6,8 +6,7 @@ export const getUser = async (userId) => {
     return await fetch(`${API_URL}${userId}`);
 };
 
-export const login = async (username, password) => {
-    console.log(username, password,  "hola")
+export const login = async (user) => {
     return await fetch(API_URL+'login/',{
         method: 'POST',
         headers:{
@@ -16,10 +15,34 @@ export const login = async (username, password) => {
         mode: 'cors', //
         // headers: [],
         body: JSON.stringify({
-            "username": String(username),
-            "password": String(password),
+            "username": String(user.username),
+            "password": String(user.password),
         })
     });
 
+};
+
+
+export const loginUsuario = async (newRegistro) => {
+    console.log(newRegistro);
+    return await fetch(API_URL,{
+        // metodos doc: https://www.w3schools.com/tags/ref_httpmethods.asp || doc: https://openjavascript.info/2022/01/03/using-fetch-to-make-get-post-put-and-delete-requests/
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        // headers: [],
+        // consolelog(newRegistro)
+        body: JSON.stringify({
+            "username": String(newRegistro.username).trim(),
+            "password": String(newRegistro.password).trim()
+            // "username": String(newRegistro.username).trim(),
+            // "password": String(newRegistro.password).trim()
+        })
+    });
+};
+
+export const conectUsuario = async (usuarioId) => {
+    return await fetch(`${API_URL}${usuarioId}`);
 };
 

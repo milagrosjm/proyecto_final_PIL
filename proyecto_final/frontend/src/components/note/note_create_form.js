@@ -26,7 +26,7 @@ const Note = () => {
    const {id, tittle, text, type, user} = note;
 
    const changeHandler = e => {
-    console.log(note)
+    //console.log(note)
     setNote({...note,[e.target.name]:[e.target.value]});
     };
 
@@ -36,7 +36,7 @@ const Note = () => {
 
     var res;
     const submitHandler = async (e) => {
-        console.log(note);
+        //console.log(note);
         e.preventDefault();
         try {
             res = await note_server.createNote(note);

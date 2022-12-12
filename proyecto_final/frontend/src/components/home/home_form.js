@@ -1,37 +1,47 @@
 //react imports
 import {Link} from 'react-router-dom'
 import React, {useState, useEffect} from "react";
-import {useParams, useNavigate} from 'react-router-dom'
+import {useParams, useNavigate, useLocation} from 'react-router-dom'
 
 //bootstrap imports
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap'
 
 //components imports
-import *  as home_server from './home_server';
+import *  as note_server from '../note/note_server';
 
 //react-icons imports
 import { RiDeleteBin2Line, RiEdit2Line,  RiAddCircleLine,RiAddFill } from "react-icons/ri";
+import Login from '../login/login_form';
 
 
 const Home = () => {
 
+    const location = useLocation();
+
     const [notesData, setNotes] = useState([]);
+
+    const history = useNavigate();
 
     const params = useParams();
 
-    const deleteHandler = id => {
-        if (window.confirm('Seguro?')){
-            alert('si', id)
-            console.log('algo', id)
-        }else{
-            console.log('otro algo')
+    const deleteHandler = async note => {
+        //console.log(note)
+        if (window.confirm('¿Esta segura de que quiere eliminar la nota "'+ note.tittle + '"?')){
+            const res = await note_server.deleteNote(note);
+            if (res.status === 200){
+                alert('La nota fue eliminada correctamente.');
+                listNotes();
+            }
+            else{
+                alert("ERROR. La nota no pudo eliminarse. Intentelo de nuevo.")
+            }
         }
     };
         
     const listNotes = async () =>{
         try{
-            const res = await home_server.getNotes(params.username);
+            const res = await note_server.getNotes(params.username);
             const notes = await res.json();
             setNotes(notes)
         }catch(error){
@@ -40,7 +50,13 @@ const Home = () => {
     }
 
     useEffect(()=>{
-        listNotes();
+        let token = location.state.token
+        if (!token){
+            history('/ingreso')
+        }
+        else{
+            listNotes();
+        }        
     },[]); 
 
 return (
@@ -73,7 +89,7 @@ return (
                                     <Link className="nav-link" to={{pathname:'/inicio/'+params.username+'/nota/'+note.id}}><RiEdit2Line size={25}/></Link>
                                 </div>
                                 <div className="col-md-1 mb-2 text-center">
-                                    <div className='nav-link' onClick={deleteHandler}><RiDeleteBin2Line size={25}/></div>
+                                    <div className='nav-link' onClick={() => deleteHandler(note)}><RiDeleteBin2Line size={25}/></div>
                                 </div>
                             </div>
                         </div>

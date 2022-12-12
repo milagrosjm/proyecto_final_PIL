@@ -22,6 +22,7 @@ const Registry = () => {
         email:"",
         username:"",
         password:"",
+        is_active: true,
 
    });
 
@@ -36,6 +37,7 @@ const Registry = () => {
         e.preventDefault();
         //console.log(user);
         try {
+            console.log(user)
             res = await registry_server.registerUser(user);
             //console.log(res)
             if (res.status === 201){

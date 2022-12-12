@@ -2,6 +2,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from user.permissions import IsAuthenticated
+
+#Authentication imports
+from user.authentication import MyOwnTokenAuthentication
 
 # Models imports
 from notes.models import Notes
@@ -14,6 +18,10 @@ from notes.notes_helper  import noteExists
 
 # Create your views here.
 class NotesApiView(APIView):
+
+    #permission_classes = (IsAuthenticated,)
+    authentication_classes = [MyOwnTokenAuthentication]
+    #permission_classes = (IsAuthenticated,)
 
     def get(self, request, user_id):
         """List of all notes from user"""
@@ -65,29 +73,29 @@ class NoteDetailApiView(APIView):
 
         if response[0]:
 
-            heroe_serializer = NoteSerializer(response[1], data=request.data)
+            note_serializer = NoteSerializer(response[1], data=request.data)
 
-            if heroe_serializer.is_valid():
-                heroe_serializer.save()
+            if note_serializer.is_valid():
+                note_serializer.save()
                 
                 data = {
                     'mensaje': 'Put funciona'
                 }
 
                 return Response(
-                    data=heroe_serializer.data,
+                    data=note_serializer.data,
                     status=status.HTTP_200_OK
                 )
 
         return Response(
-            data=heroe_serializer.errors,
+            data=note_serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
 
     def delete(self, request, id):
         
-        heroe = Notes.objects.get(id=id)
-        heroe.delete()
+        note = Notes.objects.get(id=id)
+        note.delete()
 
         data = {
             'mensaje': 'El delete funciona'
