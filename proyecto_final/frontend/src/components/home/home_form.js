@@ -1,6 +1,6 @@
 //react imports
 import {Link} from 'react-router-dom'
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {useParams, useNavigate, useLocation} from 'react-router-dom'
 
 //bootstrap imports
@@ -11,17 +11,15 @@ import 'bootstrap/dist/js/bootstrap'
 import *  as note_server from '../note/note_server';
 
 //react-icons imports
-import { RiDeleteBin2Line, RiEdit2Line,  RiAddCircleLine,RiAddFill } from "react-icons/ri";
-import Login from '../login/login_form';
+import { RiDeleteBin2Line, RiEdit2Line,  RiAddCircleLine, RiArrowDropDownLine, RiArrowDropDownFill } from "react-icons/ri";
+import auth  from "../sessionContext";
 
+//Js-Cookie package imports
+import Cookies from 'js-cookie';
 
 const Home = () => {
 
-    const location = useLocation();
-
     const [notesData, setNotes] = useState([]);
-
-    const history = useNavigate();
 
     const params = useParams();
 
@@ -50,13 +48,9 @@ const Home = () => {
     }
 
     useEffect(()=>{
-        let token = location.state.token
-        if (!token){
-            history('/ingreso')
-        }
-        else{
             listNotes();
-        }        
+            auth.username = params.username
+            auth.token = Cookies.get('token')       
     },[]); 
 
 return (
@@ -69,6 +63,10 @@ return (
             </ul>
             <ul className="navbar-nav mx-auto">
                 <li className=" navbar-item navbar-brand">INICIO</li>
+            </ul>
+            <ul className="navbar-nav mr-auto">
+                
+                
             </ul>
         </nav>
         <div className="Home-container">
@@ -105,21 +103,3 @@ return (
 
 export default Home;
 
-<div className="row">
-            <div className="col-sm-6">
-                <div className="card">
-                <div className="card-body">
-                    <h5 className="card-title">Special title treatment</h5>
-                    <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                </div>
-            </div>
-            <div className="col-sm-6">
-                <div className="card">
-                <div className="card-body">
-                    <h5 className="card-title">Special title treatment</h5>
-                    <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                </div>
-            </div>
-        </div>

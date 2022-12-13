@@ -105,81 +105,38 @@ class Login(APIView):
 
         """login_serializer = self.serializer_class(data=request.data, context = {'request':request})
         print(login_serializer)"""
-        loginuser = User.objects.get(username=request.data['username'], password=request.data['password'])
-        if loginuser:
+        try:
+            loginuser = User.objects.get(username=request.data['username'], password=request.data['password'])
             user_serializer = UserSerializer(loginuser)
             token, created = MyOwnToken.objects.get_or_create(user=user_serializer.instance)
             if created:
-                return Response(
+                response = Response(
                     {'token': token.key,
                     'user': user_serializer.data
                     },
                     status=status.HTTP_200_OK
                 )
+                response.set_cookie(key='token', value=token.key,httponly=True)
+                return response 
                 
             else:
-                print('pasa por aca')
+                #print('pasa por aca')
                 token.delete()
                 token = MyOwnToken.objects.create(user=user_serializer.instance)
-                return Response(
+                response = Response(
                     {'token': token.key,
                     'user': user_serializer.data
                     },
                     status=status.HTTP_200_OK
                 )
-        else:
-            print('entro aca')
+                response.set_cookie(key='token', value=token.key, httponly=True)
+                return response 
+
+        except User.DoesNotExist:
+            print(ValueError)
             return Response(
                 {'error': 'Username o password incorrectos'},
                 status=status.HTTP_400_BAD_REQUEST
-            )
+            )        
 
-
-
-        
-
-        """if user is None:
-            print('no existe')
-        else:
-            print('existe')"""
-        
-        """if login_serializer.is_valid(raise_exception=True):
-            
-            user = login_serializer.validated_data['user']
-
-            if user.is_active:
-                print('entra aca')
-                token, created = Token.objects.get_or_create(user=user)
-                user_serializer = UserTokenSerializer(user)
-
-                if created:
-                    return Response(
-                        {'token': token.key,
-                        'user': user_serializer.data
-                        },
-                        status=status.HTTP_200_OK
-                    )
-                
-                else:
-                    token.delete()
-                    token = Token.objects.create(user=user)
-
-                    return Response(
-                        {'token': token.key,
-                        'user': user_serializer.data
-                        },
-                        status=status.HTTP_200_OK
-                    )
-
-            else:
-                return Response(
-                    {'error': 'Este usuario no puede iniciar sesión'},
-                    status=status.HTTP_401_UNAUTHORIZED
-                )
-
-        else:
-            print(login_serializer.errors)
-            return Response(
-                {'error': 'Username o password incorrectos'},
-                status=status.HTTP_400_BAD_REQUEST
-            )"""
+    

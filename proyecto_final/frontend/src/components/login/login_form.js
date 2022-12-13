@@ -9,11 +9,12 @@ import 'bootstrap/dist/js/bootstrap'
 
 //components imports
 import *  as login_server from './login_server';
+import auth  from "../sessionContext"
 
 
 const Login = () => {
+    
     const history = useNavigate();
-    const params = useParams();
 
     const [newLogin,setUser] = useState({
         username:"",
@@ -34,11 +35,14 @@ const submitHandler = async e => {
         //console.log(newLogin)
         res = await login_server.login(newLogin);
         const data = await res.json();
-        //console.log(data.token)
+        //console.log(data)
 
         if (res.status === 200){
-            console.log('entra en 200')
+            //console.log('entra en 200')
             setUser(newLogin)
+            auth.username = newLogin.username
+            auth.token = data.token
+            //console.log(auth)
             history("/inicio/"+newLogin.username, {state:{token: data.token}});
         }
         else{

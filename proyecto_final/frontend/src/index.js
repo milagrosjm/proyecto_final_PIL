@@ -12,6 +12,7 @@ import Home from './components/home/home_form'
 import Login from './components/login/login_form'
 import NoteEdit from './components/note/note_edit_form'
 import Note from './components/note/note_create_form'
+import PrivateRoutes from './components/privateRoute/private_routes';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -23,10 +24,13 @@ root.render(
           <Routes>
             <Route exact path="/" element={<App />} />
             <Route path="/registro" element={<Registry />} />
-            <Route path="/inicio/:username" element={<Home />} />
+            <Route element={<PrivateRoutes />}>
+                <Route path="/inicio/:username" element={<Home />} />
+                <Route path="inicio/:username/nota/:id" element={<NoteEdit/>} />
+                <Route path="inicio/:username/nota/creacion" element={<Note/>} />
+            </Route>
             <Route path="/ingreso" element={<Login/>} />
-            <Route path="inicio/:username/nota/:id" element={<NoteEdit/>} />
-            <Route path="inicio/:username/nota/creacion" element={<Note/>} />
+            
           </Routes>
         </div>
     </BrowserRouter>
