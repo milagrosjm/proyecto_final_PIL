@@ -37,7 +37,7 @@ class NotesApiView(APIView):
 class NoteCreateApiView(APIView):
     def post(self, request):
             """New note"""
-
+            print(request.data)
             serializer = NoteSerializer(data=request.data)
 
             if serializer.is_valid():

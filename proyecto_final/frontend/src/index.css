@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: none !important;
 }
 
 code {
@@ -20,7 +21,25 @@ code {
 
 .Registry-container {
   background-repeat: round;
-  background-image: url(./resourses/Solid_blue.svg.png);
+  background-image: url(./resourses/RegistryBackground.png);
+  min-height: 100vh;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.CreateNote-container {
+  background-repeat: round;
+  background-image: url(./resourses/CreateNoteBackground.png);
+  min-height: 100vh;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.EditNote-container {
+  background-repeat: round;
+  background-image: url(./resourses/EditNoteBackground.png);
   min-height: 100vh;
   justify-content: center;
   display: flex;
@@ -33,7 +52,7 @@ code {
   padding-top: 30px;
   padding-bottom: 20px;
   border-radius: 8px;
-  background-color:rgba(255, 255, 255, 0.3);;
+  background-color:rgba(255, 255, 255, 0.8);
 }
 
 .Registry-form {
@@ -76,7 +95,8 @@ label {
 .Login-header {
   background-color: #282c34;
   background-repeat: round;
-  background-image: url(./resourses/abstract-blue-background-with-smooth-lines_476363-5999.webp);
+  background-image: url(./resourses/LoginBackground.png);
+  background-size: cover;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -88,7 +108,8 @@ label {
 
 .Home-container {
   background-repeat: round;
-  background-image: url(./resourses/Solid_blue.svg.png);
+  background-image: url(./resourses/HomeBackground.png);
+  background-size: cover;
   min-height: 100vh;
   justify-content: center;
   display: flex;
@@ -96,3 +117,4 @@ label {
   padding-left: 5rem;
   padding-right: 5rem;
 }
+

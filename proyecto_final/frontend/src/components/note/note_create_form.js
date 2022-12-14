@@ -23,7 +23,7 @@ const Note = () => {
         user:params.username,
    });
 
-   const {id, tittle, text, type, user} = note;
+   const {id, tittle, text, type, user_id} = note;
 
    const changeHandler = e => {
     //console.log(note)
@@ -57,7 +57,7 @@ const Note = () => {
 
 
 return (
-    <div className="Registry-container">
+    <div className="CreateNote-container">
         <div className="Auth-form-container">
             <form className="Registry-form" onSubmit={submitHandler}>
                 <div className="Auth-form-content">

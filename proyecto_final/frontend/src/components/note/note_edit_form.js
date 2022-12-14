@@ -75,7 +75,7 @@ const NoteEdit = () => {
 
 
 return (
-    <div className="Registry-container">
+    <div className="EditNote-container">
         <div className="Auth-form-container">
             <form className="Registry-form" onSubmit={submitHandler}>
                 <div className="Auth-form-content">

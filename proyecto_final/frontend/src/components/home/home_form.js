@@ -1,6 +1,6 @@
 //react imports
 import {Link} from 'react-router-dom'
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect, useRef, useMemo} from "react";
 import {useParams, useNavigate, useLocation} from 'react-router-dom'
 
 //bootstrap imports
@@ -9,6 +9,7 @@ import 'bootstrap/dist/js/bootstrap'
 
 //components imports
 import *  as note_server from '../note/note_server';
+import *  as home_server from './home_server';
 
 //react-icons imports
 import { RiDeleteBin2Line, RiEdit2Line,  RiAddCircleLine, RiArrowDropDownLine, RiArrowDropDownFill } from "react-icons/ri";
@@ -20,6 +21,8 @@ import Cookies from 'js-cookie';
 const Home = () => {
 
     const [notesData, setNotes] = useState([]);
+
+    const history = useNavigate();
 
     const params = useParams();
 
@@ -33,6 +36,29 @@ const Home = () => {
             }
             else{
                 alert("ERROR. La nota no pudo eliminarse. Intentelo de nuevo.")
+            }
+        }
+    };
+
+    const optionHandler = async (event) => {
+        //console.log(event)
+        //console.log(event.target.value)
+        if (event.target.value === 'EliminarCuenta'){
+            if (window.confirm('¿Esta segura de que quiere eliminar la cuenta?')){
+                console.log('Eliminar cuenta')
+                const res = await home_server.deleteUser(params.username)
+                if (res.status === 200){
+                    history('/')
+                    alert('El usuario "'+params.username+'" fue eliminado correctamente.');
+                }
+                else{
+                    alert("ERROR. El usuario no pudo eliminarse. Intentelo de nuevo.")
+                }
+            }
+        }
+        else{
+            if (event.target.value === 'CerrarSesion'){
+                history('/ingreso')
             }
         }
     };
@@ -65,7 +91,11 @@ return (
                 <li className=" navbar-item navbar-brand">INICIO</li>
             </ul>
             <ul className="navbar-nav mr-auto">
-                
+                <select onChange={optionHandler}>
+                    <option value=" "selected> </option>
+                    <option  value='CerrarSesion'>Cerrar Sesion</option>
+                    <option value='EliminarCuenta'>Eliminar Cuenta</option>
+                </select>
                 
             </ul>
         </nav>

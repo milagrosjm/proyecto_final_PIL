@@ -13,13 +13,14 @@ from django.contrib.auth import authenticate
 
 # Python imports
 from datetime import datetime
-import random
 
 # Models imports
 from user.models import User, MyOwnToken
+from notes.models import Notes
 
 # Serializers imports
 from user.api.serializers import UserSerializer, UserTokenSerializer
+
 
 # Create your views here.
 class UserApiView(APIView):
@@ -39,14 +40,13 @@ class UserCreateApiView(APIView):
     def post(self, request):
             """New registry"""
 
-            
             serializer = UserSerializer(data=request.data)
 
             if serializer.is_valid():
                 serializer.save()
 
                 return Response(
-                    {'message': 'User creado correctamente'},
+                    {'message': 'Usuario creado correctamente'},
                     status=status.HTTP_201_CREATED
                 )
 
@@ -57,10 +57,10 @@ class UserCreateApiView(APIView):
 
 class UserDetailApiView(APIView):
 
-    def get(self, request, pk):
+    def get(self, request, username):
         """Returns user"""
 
-        user = User.objects.get(pk=pk)
+        user = User.objects.get(pk=username)
         user_serializer = UserSerializer(user)
 
         return Response(
@@ -68,17 +68,17 @@ class UserDetailApiView(APIView):
             status=status.HTTP_200_OK
         )
 
-    def put(self, request, pk):
+    def put(self, request, username):
         """Update user"""
 
-        user = User.objects.get(pk=pk)
+        user = User.objects.get(pk=username)
         serializer = UserSerializer(user, data=request.data)
 
         if serializer.is_valid():
             serializer.create(request.data)
 
             return Response(
-                {'message': 'User modificado correctamente'},
+                {'message': 'Usuario modificado correctamente'},
                 status=status.HTTP_200_OK
             )
         return Response(
@@ -86,25 +86,27 @@ class UserDetailApiView(APIView):
             status=status.HTTP_400_BAD_REQUEST
         )
 
-    def delete(self, request, pk):
+    def delete(self, request, username):
         """Delete user"""
+        try:
+            Notes.objects.filter(user=username).delete()
+            User.objects.filter(username=username).delete()
 
-        user = User.objects.get(pk=pk)
-        user.delete()
-
-        return Response(
-            {'message': 'User eliminado correctamente'},
+            return Response(
+            {'message': 'Usuario eliminado correctamente'},
             status=status.HTTP_200_OK
         )
-
-"""class UserGetTokenApiView(APIView):
-    def post(self, request):"""
+        except User.DoesNotExist:
+            return Response(
+            {'message': 'El usuario no pudo eliminarse'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+        
 class Login(APIView):
 
     def post(self, request, *args, **kwargs):
+        """Login user"""
 
-        """login_serializer = self.serializer_class(data=request.data, context = {'request':request})
-        print(login_serializer)"""
         try:
             loginuser = User.objects.get(username=request.data['username'], password=request.data['password'])
             user_serializer = UserSerializer(loginuser)
@@ -133,9 +135,8 @@ class Login(APIView):
                 return response 
 
         except User.DoesNotExist:
-            print(ValueError)
             return Response(
-                {'error': 'Username o password incorrectos'},
+                {'error': 'Usuario o contraseña incorrectos'},
                 status=status.HTTP_400_BAD_REQUEST
             )        
 

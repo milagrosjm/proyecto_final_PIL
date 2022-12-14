@@ -15,7 +15,7 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 function App() {
   return (
     <div>
-      <nav className='navbar navbar-expand-lg'>
+      <nav className='navbar transparent navbar-expand-lg'>
         <div className='container-fluid'>
           <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -33,12 +33,8 @@ function App() {
         </div>
       </nav>
       <header className="App-header">
-        <div className='text-center'>
-          <img src={require('./resourses/logoYNombre.png')} alt='Logo de la pagina' style={{width:"300px"}}/>
-        </div>
-        <br/><br/>
         <div className='tittle'>
-          Bienvenidos a noteR
+          
         </div>
       </header>
     </div>
@@ -48,3 +44,7 @@ function App() {
 export default App;
 
 //className="App"
+
+<div className='text-center'>
+          <img src={require('./resourses/logoYNombre.png')} alt='Logo de la pagina' style={{width:"300px"}}/>
+        </div>
