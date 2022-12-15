@@ -41,10 +41,12 @@ class UserCreateApiView(APIView):
             """New registry"""
 
             serializer = UserSerializer(data=request.data)
+            print(request.data)
 
             if serializer.is_valid():
                 serializer.save()
-
+                
+                print('se guardo')
                 return Response(
                     {'message': 'Usuario creado correctamente'},
                     status=status.HTTP_201_CREATED
@@ -91,6 +93,7 @@ class UserDetailApiView(APIView):
         try:
             Notes.objects.filter(user=username).delete()
             User.objects.filter(username=username).delete()
+            #MyOwnToken.objects.filter(user=username).delete()
 
             return Response(
             {'message': 'Usuario eliminado correctamente'},

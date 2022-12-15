@@ -42,6 +42,8 @@ BASE_APPS = [
 LOCAL_APPS = [
     'user',
     'notes',
+    'toDo',
+    'Item',
 
 ]
 

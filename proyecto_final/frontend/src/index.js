@@ -12,6 +12,8 @@ import Home from './components/home/home_form'
 import Login from './components/login/login_form'
 import NoteEdit from './components/note/note_edit_form'
 import Note from './components/note/note_create_form'
+import ToDo from './components/toDo/toDo_create_form'
+import ToDoEdit from './components/toDo/toDo_edit_form'
 import PrivateRoutes from './components/privateRoute/private_routes';
 
 
@@ -28,6 +30,8 @@ root.render(
                 <Route path="/inicio/:username" element={<Home />} />
                 <Route path="inicio/:username/nota/:id" element={<NoteEdit/>} />
                 <Route path="inicio/:username/nota/creacion" element={<Note/>} />
+                <Route path="inicio/:username/checkList/creacion" element={<ToDo/>} />
+                <Route path="inicio/:username/checkList/:id" element={<ToDoEdit/>} />
             </Route>
             <Route path="/ingreso" element={<Login/>} />
             

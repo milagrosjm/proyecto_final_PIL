@@ -11,9 +11,9 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
-    def create(self, validated_data):
+    """def create(self, validated_data):
         user = User(**validated_data)
-        return user
+        return user"""
     
     """
     def update(self, instance, validated_data):

@@ -19,8 +19,7 @@
 
 /*#282c34;*/
 .App-header {
-  background-image: url(./resourses/AppBackground.png);
-  background-repeat: no-repeat;
+  
   background-size:cover;
   min-height: 100vh;
   display: flex;
@@ -28,6 +27,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+
 }
 
 .App-link {
@@ -41,4 +41,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.background{
+  background-image: url(./resourses/AppBackground.png);
+  background-repeat: round;
+}
+
+.app-nav{
+  color: #F0EDD8 !important;
+  font-weight: bold !important;
 }

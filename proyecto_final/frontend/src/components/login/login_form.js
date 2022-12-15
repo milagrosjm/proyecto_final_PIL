@@ -1,7 +1,7 @@
 //react imports
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {Link} from 'react-router-dom'
-import {useParams, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 //bootstrap imports
 import 'bootstrap/dist/css/bootstrap.css';
@@ -58,7 +58,7 @@ return (
         <div className="Auth-form-container">
             <form className="Auth-form" onSubmit={submitHandler}>
                 <div className="Auth-form-content">
-                    <h3 className="Auth-form-title">Iniciar Sesion</h3>
+                    <h3 className="Auth-form-title">Iniciar Sesión</h3>
                     <div className="form-group mt-3">
                         <input
                         type="text"

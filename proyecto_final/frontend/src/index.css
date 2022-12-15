@@ -107,14 +107,19 @@ label {
 }
 
 .Home-container {
-  background-repeat: round;
-  background-image: url(./resourses/HomeBackground.png);
-  background-size: cover;
+ 
   min-height: 100vh;
   justify-content: center;
   display: flex;
   flex-direction: column;
   padding-left: 5rem;
   padding-right: 5rem;
+}
+
+.backgroundHome{
+  background-repeat: round;
+  background-image: url(./resourses/HomeBackground.png);
+  background-size: cover;
+
 }
 

@@ -52,8 +52,6 @@ const NoteEdit = () => {
         e.preventDefault();
         try {
             res = await note_server.updateNote(note);
-            //const data = res.json()
-            //console.log(data)
             if (res.status === 200){
                 alert('La nota fue modificada correctamente.');
                 history('/inicio/'+params.username);

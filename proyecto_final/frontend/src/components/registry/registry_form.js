@@ -1,7 +1,6 @@
 //react imports
-import React, {useState, useEffect} from "react";
-import {useParams, useNavigate} from 'react-router-dom'
-import Select from 'react-select';
+import React, {useState} from "react";
+import {useNavigate} from 'react-router-dom'
 
 //bootstrap imports
 import 'bootstrap/dist/css/bootstrap.css';
@@ -14,7 +13,6 @@ import *  as registry_server from './registry_server';
 const Registry = () => {
 
     const history = useNavigate();
-    const params = useParams();
 
     const [user,setUser] = useState({
         name:"",
@@ -127,7 +125,7 @@ return (
                         </div>
                     </div>
                     <div className="d-grid gap-2 mt-3">
-                        <button type="submit" className="btn btn-primary" on>
+                        <button type="submit" className="btn btn-primary">
                         Registrar
                         </button>
                     </div>
