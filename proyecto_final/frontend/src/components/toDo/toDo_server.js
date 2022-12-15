@@ -40,8 +40,12 @@ export const getToDo = async (username) => {
     return await fetch(API_URL+'toDo/'+username+ '/');
 };
 
-export const getToDoItems = async (username) => {
-    return await fetch(API_URL+'toDoItems/'+username+ '/');
+export const getToDoDetail = async (toDo_id) => {
+    return await fetch(API_URL+'toDoDetail/'+toDo_id+ '/');
+};
+
+export const getToDoItems = async (toDo_id) => {
+    return await fetch(API_URL+'toDoItems/'+toDo_id+ '/');
 };
 
 export const deleteToDo = async (toDo) => {

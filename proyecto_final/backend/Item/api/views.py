@@ -12,17 +12,16 @@ from Item.api.serializers import ItemSerializer
 #Helpers imports
 from Item.item_helper  import itemExists
 # Create your views here.
-class ToDoApiView(APIView):
+class ItemApiView(APIView):
 
-    def get(self, request, user_id):
-        """List of all checklists from user"""
+    def get(self, request, id):
+        """List of all items from toDo"""
 
-        toDo = toDo.objects.filter(user_id=user_id)
-        toDo_serializer = ItemSerializer(toDo, many=True)
+        items = Item.objects.filter(toDo_id=id)
+        items_serializer = ItemSerializer(items, many=True)
 
         return Response(
-            data=toDo_serializer.data,
-            
+            data=items_serializer.data,
         )
 
 class ItemCreateApiView(APIView):

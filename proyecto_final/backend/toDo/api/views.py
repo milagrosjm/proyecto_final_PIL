@@ -29,12 +29,10 @@ class ToDoApiView(APIView):
 class ToDoCreateApiView(APIView):
     def post(self, request):
             """New checklist"""
-            print(request.data)
             serializer = ToDoSerializer(data=request.data)
 
             if serializer.is_valid():
-                newToDo = serializer.save()
-                print(newToDo.id)
+                serializer.save()
 
                 return Response(
                     data=serializer.data,
@@ -52,8 +50,8 @@ class ToDoDetailApiView(APIView):
     def get(self, request, id):
         """Returns a checklist"""
 
-        toDo = toDo.objects.get(id=id)
-        toDo_serializer = ToDoSerializer(toDo)
+        toDo_detail = toDo.objects.get(id=id)
+        toDo_serializer = ToDoSerializer(toDo_detail)
 
         return Response(
             data=toDo_serializer.data,

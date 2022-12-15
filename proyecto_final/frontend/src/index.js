@@ -14,6 +14,7 @@ import NoteEdit from './components/note/note_edit_form'
 import Note from './components/note/note_create_form'
 import ToDo from './components/toDo/toDo_create_form'
 import ToDoEdit from './components/toDo/toDo_edit_form'
+import ToDoDetail from './components/toDo/toDo_datail_form';
 import PrivateRoutes from './components/privateRoute/private_routes';
 
 
@@ -32,6 +33,7 @@ root.render(
                 <Route path="inicio/:username/nota/creacion" element={<Note/>} />
                 <Route path="inicio/:username/checkList/creacion" element={<ToDo/>} />
                 <Route path="inicio/:username/checkList/:id" element={<ToDoEdit/>} />
+                <Route path="inicio/:username/detallecheckList/:id" element={<ToDoDetail/>} />
             </Route>
             <Route path="/ingreso" element={<Login/>} />
             
