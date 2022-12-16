@@ -14,7 +14,7 @@ class Notes(models.Model):
 
     )
     tittle = models.CharField(
-        max_length=20,
+        max_length=35,
         verbose_name='Titulo',
         default=' '
     )

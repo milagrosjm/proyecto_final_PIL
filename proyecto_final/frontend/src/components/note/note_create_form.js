@@ -75,6 +75,7 @@ return (
                                 onChange={changeHandler}
                                 required
                                 />
+                                <p><small style={{color:"grey"}}>(Máximo 35 caracteres)</small></p>
                             </div>
                         </div>
                         <div className="row">
