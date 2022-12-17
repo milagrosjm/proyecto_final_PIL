@@ -21,29 +21,23 @@ const ToDoEdit = () => {
         tittle:"",
         user:params.username,
     });
-    const [item,setItem] = useState({
-    text:"",
-    toDo_id:params.id,
-    });
+    const [itemsList,setItems] = useState([]);
 
     const {id, tittle, user_id} = toDo;
 
-    const {idd, text, toDo_id} = item;
-
     const getToDo = async () => { 
         try{
-            const res = await toDo_server.getToDo(params.id);
+            const res = await toDo_server.getToDoDetail(params.id);
             const data = await res.json();
             const { id, tittle,user } = data;
+            console.log(data)
             setToDo({ tittle, user});
 
             const resp = await toDo_server.getToDoItems(params.id);
-            const dt = await res.json();
-            const { idd, text,toDo_id } = dt;
-            setItem({ text, toDo_id});
+            const dt = await resp.json();
+            setItems(dt);
         } catch (error){
             console.log(error);
-    
         }
         };
 
@@ -58,7 +52,6 @@ const ToDoEdit = () => {
         const list = [...items];
         list[index][name] = value;
         setInputList(list);
-        //console.log(items)
       };
 
     const addClickHandler = () => {
@@ -137,6 +130,30 @@ return (
                             <div className="col-2 mb-2 text-center">
                                 <button type="button" className="btn btn-secondary" onClick={addClickHandler}>+</button>
                             </div>
+                            {itemsList.map((item, index) => {return (
+                                <div className="row">
+                                    <div className="col-1 mb-2">
+                                        <input className="form-check-input"
+                                        type="checkbox"
+                                        name="checked"
+                                        onChange={e => checkboxChangeHandler(e,index)}
+                                        defaultChecked={item.checked}
+                                        disabled
+                                        />
+                                    </div>
+                                    <div className="col-11 mb-2">
+                                        <input
+                                        type="text"
+                                        name="text"
+                                        value={item.text}
+                                        onChange={e => inputChangeHandler(e, index)}
+                                        className="form-control mt-1"
+                                        placeholder="Texto"
+                                        disabled
+                                        />
+                                    </div>
+                                </div>
+                            )})}
                             {items.map((x, i) => {return (
                                 <div className="row">
                                     <div className="col-1 mb-2">
@@ -158,7 +175,6 @@ return (
                                         required
                                         />
                                     </div>
-
                                 </div>
                             )})}
                         </div>

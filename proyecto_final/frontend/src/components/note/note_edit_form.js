@@ -48,7 +48,7 @@ const NoteEdit = () => {
 
     var res;
     const submitHandler = async (e) => {
-        console.log(note);
+        //console.log(note);
         e.preventDefault();
         try {
             res = await note_server.updateNote(note);

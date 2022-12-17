@@ -39,7 +39,7 @@ const ToDoDetail = () => {
             const resp = await toDo_server.getToDoItems(id);
             const items = await resp.json();
             setToDoItems(items);
-            console.log(items)
+            //console.log(items)
         } catch (error){
             console.log(error);
         }
@@ -72,7 +72,7 @@ return (
                                 toDoItems.map(item => 
                                 <div className="row" key={item.id}>
                                     <div className="col-1 mb-2">
-                                        <input classsName='form-check-input' type='checkbox' disabled defaultChecked={item.checked}></input>
+                                        <input className='form-check-input' type='checkbox' disabled defaultChecked={item.checked}></input>
                                     </div>
                                     <div className="col-11 mb-2">
                                         <h6 className="card-title">{item.text}</h6>
