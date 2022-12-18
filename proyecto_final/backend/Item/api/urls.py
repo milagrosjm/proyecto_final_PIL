@@ -4,7 +4,6 @@ from django.urls import path
 # Views imports
 from Item.api.views import ItemCreateApiView, ItemApiView, ItemsDetailApiView
 
-
 # Urls
 urlpatterns = [
     path(

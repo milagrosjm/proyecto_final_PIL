@@ -8,10 +8,6 @@ import 'bootstrap/dist/js/bootstrap'
 //components imports
 import *  as toDo_server from './toDo_server';
 
-//react-icons imports
-
-
-
 const ToDoEdit = () => {
 
     const history = useNavigate();
@@ -31,7 +27,6 @@ const ToDoEdit = () => {
             const res = await toDo_server.getToDoDetail(params.id);
             const data = await res.json();
             const { id, tittle,user } = data;
-            //console.log(data)
             setToDo({ id, tittle, user});
 
             const resp = await toDo_server.getToDoItems(params.id);
@@ -64,7 +59,6 @@ const ToDoEdit = () => {
         const list = [...items];
         list[index][name] = e.target.checked;
         setInputList(list);
-        //console.log(items)
     };
 
     const oldItemsCheckboxChangeHandler = (e, index) => {
@@ -72,7 +66,6 @@ const ToDoEdit = () => {
         const list = [...itemsList];
         list[index][name] = e.target.checked;
         setItems(list);
-        //console.log(items)
     };
 
 
@@ -82,11 +75,8 @@ const ToDoEdit = () => {
 
     var res,resp, respu;
     const submitHandler = async (e) => {
-        //console.log();
         e.preventDefault();
         try {
-            //console.log(toDo)
-            //console.log(items, toDo.id)
             res = await toDo_server.updateToDo(toDo);
             resp = await toDo_server.updateItems(itemsList, toDo.id);
             if (items[0].text !== ''){
@@ -201,7 +191,6 @@ return (
         </div> 
     </div>
     
-);
-};
+);};
 
 export default ToDoEdit;

@@ -8,9 +8,6 @@ import 'bootstrap/dist/js/bootstrap'
 //components imports
 import *  as note_server from './note_server';
 
-//react-icons imports
-
-
 const NoteEdit = () => {
 
     const history = useNavigate();
@@ -34,7 +31,6 @@ const NoteEdit = () => {
         setNote({ id, tittle, text, type, user});
     } catch (error){
         console.log(error);
-
     }
     };
 
@@ -48,7 +44,6 @@ const NoteEdit = () => {
 
     var res;
     const submitHandler = async (e) => {
-        //console.log(note);
         e.preventDefault();
         try {
             res = await note_server.updateNote(note);
@@ -121,7 +116,6 @@ return (
         </div> 
     </div>
     
-);
-};
+);};
 
 export default NoteEdit;

@@ -29,20 +29,15 @@ const changeHandler = e => {
 
 const submitHandler = async e => {
     e.preventDefault();
-        //console.log(user);
     try {
         let res;
-        //console.log(newLogin)
         res = await login_server.login(newLogin);
         const data = await res.json();
-        //console.log(data)
 
         if (res.status === 200){
-            //console.log('entra en 200')
             setUser(newLogin)
             auth.username = newLogin.username
             auth.token = data.token
-            //console.log(auth)
             history("/inicio/"+newLogin.username, {state:{token: data.token}});
         }
         else{
@@ -95,8 +90,6 @@ return (
             </form>
         </div>
     </header>
-);
-
-};
+);};
 
 export default Login;

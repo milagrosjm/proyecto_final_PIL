@@ -9,7 +9,6 @@ import 'bootstrap/dist/js/bootstrap'
 //components imports
 import *  as registry_server from './registry_server';
 
-
 const Registry = () => {
 
     const history = useNavigate();
@@ -33,13 +32,9 @@ const Registry = () => {
     var res;
     const submitHandler = async e => {
         e.preventDefault();
-        //console.log(user);
         try {
-            console.log(user)
             res = await registry_server.registerUser(user);
-            //console.log(res)
             if (res.status === 201){
-                //console.log(res.status)
                 alert('El usuario fue registrado correctamente.');
                 history("/ingreso");
             }
@@ -48,7 +43,6 @@ const Registry = () => {
             }
           } catch{
             alert("ERROR. No se pudo registrar el usuario.")
-            //console.log('Error al registrar usuario');
           }
         }
 
@@ -134,8 +128,6 @@ return (
         </div>
     </div>
  
-);
-
-};
+);};
 
 export default Registry;

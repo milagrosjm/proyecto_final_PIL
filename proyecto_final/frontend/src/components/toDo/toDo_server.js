@@ -1,7 +1,6 @@
 const API_URL = 'http://localhost:8000/noter/'
 
 export const createToDo = async (newTodo) => {
-    //console.log(newNote, "hola", newNote.text)
     return await fetch(API_URL+'createToDo/',{
         method: 'POST',
         headers:{
@@ -16,10 +15,7 @@ export const createToDo = async (newTodo) => {
 };
 
 export const createItems = async (newItems, toDo_id) => {
-    //console.log(newItems)
     newItems.forEach(async item =>{
-        //console.log('entra en el for')
-        //console.log(item.text)
         return await fetch(API_URL+'createToDoItem/',{
             method: 'POST',
             headers:{
@@ -66,8 +62,6 @@ export const updateToDo = async (toDo) => {
 export const updateItems = async (items, toDo_id) => {
 
     items.forEach(async item =>{
-        //console.log('entra en el for')
-        //console.log(item.text)
         return await fetch(API_URL+'itemsDetail/'+ item.id + '/',{
             method: 'PUT',
             headers:{

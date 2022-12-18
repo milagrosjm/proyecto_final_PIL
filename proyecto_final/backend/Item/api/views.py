@@ -11,6 +11,7 @@ from Item.api.serializers import ItemSerializer
 
 #Helpers imports
 from Item.item_helper  import itemExists
+
 # Create your views here.
 class ItemApiView(APIView):
 
@@ -27,7 +28,6 @@ class ItemApiView(APIView):
 class ItemCreateApiView(APIView):
     def post(self, request):
             """New checklist"""
-            print(request.data)
             serializer = ItemSerializer(data=request.data)
 
             if serializer.is_valid():

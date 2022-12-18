@@ -8,9 +8,6 @@ import 'bootstrap/dist/js/bootstrap'
 //components imports
 import *  as note_server from './note_server';
 
-//react-icons imports
-
-
 const Note = () => {
 
     const history = useNavigate();
@@ -26,7 +23,6 @@ const Note = () => {
    const {id, tittle, text, type, user_id} = note;
 
    const changeHandler = e => {
-    //console.log(note)
     setNote({...note,[e.target.name]:[e.target.value]});
     };
 
@@ -36,12 +32,9 @@ const Note = () => {
 
     var res;
     const submitHandler = async (e) => {
-        //console.log(note);
         e.preventDefault();
         try {
             res = await note_server.createNote(note);
-            //const data = res.json()
-            //console.log(data)
             if (res.status === 201){
                 alert('La nota fue creada correctamente.');
                 history('/inicio/'+params.username);
@@ -106,7 +99,6 @@ return (
         </div> 
     </div>
     
-);
-};
+);};
 
 export default Note;

@@ -8,10 +8,6 @@ import 'bootstrap/dist/js/bootstrap'
 //components imports
 import *  as toDo_server from './toDo_server';
 
-//react-icons imports
-
-
-
 const ToDoDetail = () => {
 
     const history = useNavigate();
@@ -39,7 +35,6 @@ const ToDoDetail = () => {
             const resp = await toDo_server.getToDoItems(id);
             const items = await resp.json();
             setToDoItems(items);
-            //console.log(items)
         } catch (error){
             console.log(error);
         }
@@ -93,7 +88,6 @@ return (
         </div> 
     </div>
     
-);
-}
+);};
 
 export default ToDoDetail;

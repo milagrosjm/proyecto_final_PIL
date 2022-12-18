@@ -4,7 +4,6 @@ from django.urls import path
 # Views imports
 from toDo.api.views import ToDoApiView, ToDoDetailApiView, ToDoCreateApiView
 
-
 # Urls
 urlpatterns = [
     path(

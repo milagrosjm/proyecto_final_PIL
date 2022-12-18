@@ -23,7 +23,6 @@ export const updateNote = async (note) => {
 };
 
 export const createNote = async (newNote) => {
-    //console.log(newNote, "hola", newNote.text)
     return await fetch(API_URL+'createNote/',{
         method: 'POST',
         headers:{

@@ -18,10 +18,7 @@ from notes.notes_helper  import noteExists
 
 # Create your views here.
 class NotesApiView(APIView):
-
-    #permission_classes = (IsAuthenticated,)
     authentication_classes = [MyOwnTokenAuthentication]
-    #permission_classes = (IsAuthenticated,)
 
     def get(self, request, user_id):
         """List of all notes from user"""
@@ -37,7 +34,6 @@ class NotesApiView(APIView):
 class NoteCreateApiView(APIView):
     def post(self, request):
             """New note"""
-            print(request.data)
             serializer = NoteSerializer(data=request.data)
 
             if serializer.is_valid():
@@ -98,7 +94,7 @@ class NoteDetailApiView(APIView):
         note.delete()
 
         data = {
-            'mensaje': 'El delete funciona'
+            'mensaje': 'Delete funciona'
         }
 
         return Response(

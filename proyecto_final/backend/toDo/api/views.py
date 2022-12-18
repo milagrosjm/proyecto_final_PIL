@@ -13,6 +13,7 @@ from toDo.api.serializers import ToDoSerializer
 
 #Helpers imports
 from toDo.toDo_helper  import toDoExists
+
 # Create your views here.
 class ToDoApiView(APIView):
 
@@ -90,7 +91,7 @@ class ToDoDetailApiView(APIView):
         note.delete()
 
         data = {
-            'mensaje': 'El delete funciona'
+            'mensaje': 'Delete funciona'
         }
 
         return Response(

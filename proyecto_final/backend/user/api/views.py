@@ -2,17 +2,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.authtoken.models import Token
-from rest_framework.authentication import TokenAuthentication
-
-# Django imports
-from django.contrib.sessions.models import Session
-from django.contrib.auth import authenticate
-
-# Python imports
-from datetime import datetime
 
 # Models imports
 from user.models import User, MyOwnToken
@@ -20,7 +9,6 @@ from notes.models import Notes
 
 # Serializers imports
 from user.api.serializers import UserSerializer, UserTokenSerializer
-
 
 # Create your views here.
 class UserApiView(APIView):
@@ -41,7 +29,6 @@ class UserCreateApiView(APIView):
             """New registry"""
 
             serializer = UserSerializer(data=request.data)
-            print(request.data)
 
             if serializer.is_valid():
                 serializer.save()
@@ -93,7 +80,6 @@ class UserDetailApiView(APIView):
         try:
             Notes.objects.filter(user=username).delete()
             User.objects.filter(username=username).delete()
-            #MyOwnToken.objects.filter(user=username).delete()
 
             return Response(
             {'message': 'Usuario eliminado correctamente'},
@@ -125,7 +111,6 @@ class Login(APIView):
                 return response 
                 
             else:
-                #print('pasa por aca')
                 token.delete()
                 token = MyOwnToken.objects.create(user=user_serializer.instance)
                 response = Response(

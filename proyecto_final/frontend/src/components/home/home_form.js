@@ -37,7 +37,6 @@ const Home = () => {
 
     const [toDoData, setToDo] = useState([]);
 
-
     const history = useNavigate();
 
     const params = useParams();
@@ -73,11 +72,8 @@ const Home = () => {
     };
 
     const optionHandler = async (value) => {
-        console.log(value)
-        console.log(value[0].value)
         if (value[0].value === 'EliminarCuenta'){
             if (window.confirm('¿Esta segura de que quiere eliminar la cuenta?')){
-                console.log('Eliminar cuenta')
                 const res = await home_server.deleteUser(params.username)
                 if (res.status === 200){
                     history('/')
@@ -118,7 +114,6 @@ const Home = () => {
     useEffect(()=>{
             listNotes();
             listToDo();
-            console.log(toDoData)
             auth.username = params.username
             auth.token = Cookies.get('token')       
     },[]); 
@@ -207,18 +202,3 @@ return (
 };
 
 export default Home;
-
-<li className='nav-item dropdown'>
-                    <a className="nav-link dropdown-toggle" href="#hola" role="button" id="dropdownMenuLink"  data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-                        <ul class="dropdown-menu" aria-labelledby='dropdownMenuLink'>
-                            <li><a className="dropdown-item" href="#tuki">Action</a></li>
-                            <li><a className="dropdown-item" href="#uki">Another action</a></li>
-                            <li><a className="dropdown-item" href="#uki">Something else here</a></li>
-                        </ul>
-
-                        <select >
-                    <option value=" "> </option>
-                    <option  value='CerrarSesion'>Cerrar Sesion</option>
-                    <option value='EliminarCuenta'>Eliminar Cuenta</option>
-                </select>
-                </li>

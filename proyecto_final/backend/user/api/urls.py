@@ -4,9 +4,6 @@ from django.urls import path
 # Views imports
 from user.api.views import UserApiView, UserDetailApiView, UserCreateApiView, Login
 
-#Rest framework imports
-
-
 # Urls
 urlpatterns = [
     path(

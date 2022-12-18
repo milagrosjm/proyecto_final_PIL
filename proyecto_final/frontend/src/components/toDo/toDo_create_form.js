@@ -8,9 +8,6 @@ import 'bootstrap/dist/js/bootstrap'
 //components imports
 import *  as toDo_server from './toDo_server';
 
-//react-icons imports
-
-
 const ToDo = () => {
 
     const history = useNavigate();
@@ -45,7 +42,6 @@ const ToDo = () => {
         const list = [...items];
         list[index][name] = e.target.checked;
         setInputList(list);
-        //console.log(items)
     };
 
     const cancelHandler = e => {
@@ -60,7 +56,6 @@ const ToDo = () => {
             const data = await res.json();
             const id = data['id']
             resp = await toDo_server.createItems(items, id);
-            console.log(res.status)
             if (res.status === 201){
                 alert('El checkList fue creado correctamente.');
                 history('/inicio/'+params.username);
@@ -144,7 +139,6 @@ return (
         </div> 
     </div>
     
-);
-};
+);};
 
 export default ToDo;
