@@ -44,18 +44,7 @@ class ItemCreateApiView(APIView):
             )
 
 
-class ToDoDetailApiView(APIView):
-
-    def get(self, request, id):
-        """Returns a checklist"""
-
-        toDo = toDo.objects.get(id=id)
-        toDo_serializer = ItemSerializer(toDo)
-
-        return Response(
-            data=toDo_serializer.data,
-            status=status.HTTP_200_OK
-        )
+class ItemsDetailApiView(APIView):
     
     def put(self, request, id):
         
@@ -63,22 +52,22 @@ class ToDoDetailApiView(APIView):
 
         if response[0]:
 
-            toDo_serializer = ItemSerializer(response[1], data=request.data)
+            item_serializer = ItemSerializer(response[1], data=request.data)
 
-            if toDo_serializer.is_valid():
-                toDo_serializer.save()
+            if item_serializer.is_valid():
+                item_serializer.save()
                 
                 data = {
                     'mensaje': 'Put funciona'
                 }
 
                 return Response(
-                    data=toDo_serializer.data,
+                    data=item_serializer.data,
                     status=status.HTTP_200_OK
                 )
 
         return Response(
-            data=toDo_serializer.errors,
+            data=item_serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
 

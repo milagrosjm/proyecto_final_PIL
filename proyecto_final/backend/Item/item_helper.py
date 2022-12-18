@@ -3,9 +3,9 @@ from Item.models import Item
 def itemExists(id):
 
     try:
-        note= Item.objects.get(id=id)
+        item= Item.objects.get(id=id)
 
-        return [True, note]
+        return [True, item]
 
     except:
 

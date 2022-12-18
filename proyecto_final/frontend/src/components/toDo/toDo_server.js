@@ -48,6 +48,41 @@ export const getToDoItems = async (toDo_id) => {
     return await fetch(API_URL+'toDoItems/'+toDo_id+ '/');
 };
 
+export const updateToDo = async (toDo) => {
+    return await fetch(API_URL+'toDoDetail/'+toDo.id+'/',{
+        method: 'PUT',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "id": Number(toDo.id),
+            "tittle": String(toDo.tittle),
+            "user": String(toDo.user)
+        })
+
+    });
+};
+
+export const updateItems = async (items, toDo_id) => {
+
+    items.forEach(async item =>{
+        //console.log('entra en el for')
+        //console.log(item.text)
+        return await fetch(API_URL+'itemsDetail/'+ item.id + '/',{
+            method: 'PUT',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "id": Number(item.id),
+                "text": String(item.text),
+                "checked": Boolean(item.checked),
+                "toDo": Number(toDo_id),
+            })
+        });
+    });
+};
+
 export const deleteToDo = async (toDo) => {
     return await fetch(API_URL+'toDoDetail/'+toDo.id+'/',{
         method: 'DELETE',

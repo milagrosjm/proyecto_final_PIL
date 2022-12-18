@@ -18,6 +18,7 @@ const ToDoEdit = () => {
     const params = useParams();
 
     const [toDo,setToDo] = useState({
+        id: 0,
         tittle:"",
         user:params.username,
     });
@@ -30,8 +31,8 @@ const ToDoEdit = () => {
             const res = await toDo_server.getToDoDetail(params.id);
             const data = await res.json();
             const { id, tittle,user } = data;
-            console.log(data)
-            setToDo({ tittle, user});
+            //console.log(data)
+            setToDo({ id, tittle, user});
 
             const resp = await toDo_server.getToDoItems(params.id);
             const dt = await resp.json();
@@ -63,32 +64,42 @@ const ToDoEdit = () => {
         const list = [...items];
         list[index][name] = e.target.checked;
         setInputList(list);
-        console.log(items)
+        //console.log(items)
     };
+
+    const oldItemsCheckboxChangeHandler = (e, index) => {
+        const {name, value} = e.target
+        const list = [...itemsList];
+        list[index][name] = e.target.checked;
+        setItems(list);
+        //console.log(items)
+    };
+
 
     const cancelHandler = e => {
         history('/inicio/'+params.username);
     };
 
-    var res,resp;
+    var res,resp, respu;
     const submitHandler = async (e) => {
         //console.log();
         e.preventDefault();
         try {
-            res = await toDo_server.createToDo(toDo);
-            const data = await res.json();
-            const id = data['id']
-            resp = await toDo_server.createItems(items, id);
-            //console.log(data)
-            console.log(res.status)
-            if (res.status === 201){
-                alert('El checkList fue creado correctamente.');
+            //console.log(toDo)
+            //console.log(items, toDo.id)
+            res = await toDo_server.updateToDo(toDo);
+            resp = await toDo_server.updateItems(itemsList, toDo.id);
+            if (items[0].text !== ''){
+                //there is new items
+                respu = await toDo_server.createItems(items, params.id)
+            }
+            if (res.status === 200){
+                alert('El checkList fue modificado correctamente.');
                 history('/inicio/'+params.username);
             }
             else{
-                alert("ERROR. El checkList no pudo crearse.")
+                alert("ERROR. El checkList no pudo modificarse.")
             }
-            
         } catch (error) {
           console.log(error);
         }
@@ -131,14 +142,13 @@ return (
                                 <button type="button" className="btn btn-secondary" onClick={addClickHandler}>+</button>
                             </div>
                             {itemsList.map((item, index) => {return (
-                                <div className="row">
+                                <div className="row" key={item.id}>
                                     <div className="col-1 mb-2">
                                         <input className="form-check-input"
                                         type="checkbox"
                                         name="checked"
-                                        onChange={e => checkboxChangeHandler(e,index)}
+                                        onChange={e => oldItemsCheckboxChangeHandler(e,index)}
                                         defaultChecked={item.checked}
-                                        disabled
                                         />
                                     </div>
                                     <div className="col-11 mb-2">
@@ -172,7 +182,6 @@ return (
                                         onChange={e => inputChangeHandler(e, i)}
                                         className="form-control mt-1"
                                         placeholder="Texto"
-                                        required
                                         />
                                     </div>
                                 </div>
