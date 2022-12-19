@@ -15,4 +15,4 @@ En cuanto al frontend se utilizaron los paquetes:
 - react-router-dom (6.4.4)
 - react-select (5.7.0)
 
-Pudiendo instalarse con el siguiente comando "npm install <<paquete>> --save". Las dependencias en mayor detalle se encuentran en frontend/package.json. 
+Pudiendo instalarse con el siguiente comando "npm install [paquete] --save". Las dependencias en mayor detalle se encuentran en frontend/package.json. 
